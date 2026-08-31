@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="stylesheet" href="_ds/organic-b24c682f-7306-4960-b8b2-b049226d348c/styles.css"><script src="_ds/organic-b24c682f-7306-4960-b8b2-b049226d348c/_ds_bundle.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap"><style>
+body{margin:0;background:#e8dcc6;font-family:Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#8c491a}a:hover{color:#b2622d}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(32,30,29,.1);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#201e1d;color:#f5ead8;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 Figtree,system-ui,sans-serif;color:#201e1d}
+.dv-opts{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(32,30,29,.1);color:#201e1d;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11.5px/1.3 Figtree,system-ui,sans-serif;color:rgba(32,30,29,.6)}
+.dv-opt:target .dv-oid{background:#c67139;color:#f5ead8}
+.dv-next{margin:24px 0 0;font:12px/1.6 Figtree,system-ui,sans-serif;color:rgba(32,30,29,.55)}
+.sb{scrollbar-width:none;-ms-overflow-style:none}.sb::-webkit-scrollbar{width:0;height:0;display:none}
+</style></helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Workout log — Warm Ledger</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Tap a day, swipe set rows to log. Muted numbers carry over from last session.</div>
+<div style="padding:11px;border-radius:58px;background:#201e1d;box-shadow:0 18px 44px rgba(46,43,37,.28)">
+<div style="width:390px;height:844px;border-radius:47px;overflow:hidden;background:#f5ead8;color:#201e1d;position:relative;display:flex;flex-direction:column">
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 30px 4px;font-size:13px;font-weight:700;flex:none">
+<span>9:41</span>
+<div style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:9px;border-radius:2px;background:#201e1d;display:block"></span><span style="width:16px;height:9px;border-radius:2px;background:rgba(32,30,29,.28);display:block"></span><span style="width:22px;height:11px;border-radius:3px;border:1.5px solid #201e1d;display:block"></span></div>
+</div>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div class="sb" style="flex:1;overflow-y:auto;padding:14px 22px 24px">
+<div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(32,30,29,.45)">Tuesday · 31 Aug</div>
+<h1 style="font-family:Caprasimo,serif;font-size:40px;line-height:1.02;letter-spacing:-.02em;margin:6px 0 4px">Pick your<br>day.</h1>
+<div style="font-size:13.5px;line-height:1.5;color:rgba(32,30,29,.6);margin-bottom:22px">Three full-body days, cycled however you like. Last week you ran A, then C.</div>
+
+<sc-for list="{{ days }}" as="day" hint-placeholder-count="3">
+<div onClick="{{ day.open }}" style="cursor:pointer;background:#fffaf1;border:1px solid rgba(32,30,29,.09);border-radius:28px;padding:18px 20px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(46,43,37,.1)" style-hover="box-shadow:0 6px 18px rgba(46,43,37,.16);transform:translateY(-1px)">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+<div>
+<div style="display:flex;align-items:center;gap:8px">
+<span style="font-family:Caprasimo,serif;font-size:26px;line-height:1">{{ day.name }}</span>
+<sc-if value="{{ day.isNext }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#e1eecc;color:#56633f;padding:4px 9px;border-radius:999px">Up next</span></sc-if>
+</div>
+<div style="font-size:13px;color:rgba(32,30,29,.62);margin-top:5px">{{ day.focus }}</div>
+</div>
+<div style="width:44px;height:44px;border-radius:999px;background:#f5ead8;display:flex;align-items:center;justify-content:center;flex:none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c491a" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:14px;margin-top:14px;padding-top:13px;border-top:1px solid rgba(32,30,29,.09);font-size:12px;color:rgba(32,30,29,.55)">
+<span><b style="color:#201e1d;font-weight:700">{{ day.exCount }}</b> lifts</span>
+<span><b style="color:#201e1d;font-weight:700">{{ day.setCount }}</b> sets</span>
+<span style="margin-left:auto">Last done {{ day.lastDone }}</span>
+</div>
+</div>
+</sc-for>
+
+<div style="margin-top:22px;background:#ebddc5;border-radius:28px;padding:18px 20px">
+<div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(32,30,29,.5);margin-bottom:12px">This week</div>
+<div style="display:flex;gap:7px;align-items:flex-end;height:52px">
+<sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px">
+<div style="width:100%;border-radius:8px;background:{{ d.fill }};height:{{ d.h }}px"></div>
+<span style="font-size:10px;font-weight:700;color:rgba(32,30,29,.45)">{{ d.label }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSession }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;display:flex;align-items:center;gap:12px;padding:6px 20px 12px;background:#f5ead8">
+<div onClick="{{ goHome }}" style="cursor:pointer;width:40px;height:40px;border-radius:999px;background:#ebddc5;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:#dcd3c4">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#201e1d" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font-family:Caprasimo,serif;font-size:22px;line-height:1.1">{{ session.name }}</div>
+<div style="font-size:11.5px;color:rgba(32,30,29,.55);margin-top:1px">{{ session.subtitle }}</div>
+</div>
+<div style="font-family:Caprasimo,serif;font-size:15px;color:#8c491a;flex:none">{{ session.doneLabel }}</div>
+</div>
+<div style="flex:none;height:4px;background:rgba(32,30,29,.1);margin:0 20px;border-radius:999px;overflow:hidden">
+<div style="height:100%;background:#c67139;border-radius:999px;width:{{ session.pct }}%"></div>
+</div>
+<sc-if value="{{ rest.on }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;margin:12px 20px 0;background:#fffaf1;border:1px solid rgba(32,30,29,.08);border-radius:26px;padding:12px 13px 10px;box-shadow:0 3px 10px rgba(46,43,37,.14)">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;min-width:0">
+<div style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:{{ rest.kickerColor }}">{{ rest.kicker }}</div>
+<div style="display:flex;align-items:baseline;gap:8px;margin-top:2px">
+<span style="font-family:Caprasimo,serif;font-size:30px;line-height:1;font-variant-numeric:tabular-nums">{{ rest.clock }}</span>
+<span style="font-size:11.5px;font-weight:700;color:rgba(32,30,29,.5);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ rest.next }}</span>
+</div>
+</div>
+<div onClick="{{ rest.add }}" style="cursor:pointer;flex:none;width:46px;height:46px;border-radius:999px;background:#ebddc5;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;color:#645c50" style-hover="background:#dcd3c4">+30</div>
+<div onClick="{{ rest.toggle }}" style="cursor:pointer;flex:none;width:46px;height:46px;border-radius:999px;background:#c67139;display:flex;align-items:center;justify-content:center" style-hover="background:#b2622d">
+<sc-if value="{{ rest.running }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fffaf1" stroke-width="3" stroke-linecap="round"><path d="M9 5v14M15 5v14"></path></svg></sc-if>
+<sc-if value="{{ rest.paused }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fffaf1" stroke="#fffaf1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l13 8-13 8z"></path></svg></sc-if>
+</div>
+<div onClick="{{ rest.skip }}" style="cursor:pointer;flex:none;width:46px;height:46px;border-radius:999px;background:#ebddc5;display:flex;align-items:center;justify-content:center" style-hover="background:#dcd3c4">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l9 7-9 7z"></path><path d="M19 5v14"></path></svg>
+</div>
+</div>
+<div style="height:4px;border-radius:999px;background:rgba(32,30,29,.1);margin-top:11px;overflow:hidden">
+<div style="height:100%;border-radius:999px;background:{{ rest.barColor }};width:{{ rest.pct }}%"></div>
+</div>
+</div>
+</sc-if>
+
+<div class="sb" style="flex:1;overflow-y:auto;padding:16px 20px 20px">
+<sc-for list="{{ exercises }}" as="ex" hint-placeholder-count="4">
+<div style="background:#fffaf1;border:1px solid rgba(32,30,29,.09);border-radius:26px;padding:15px 14px 11px;margin-bottom:11px">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:0 4px">
+<div style="min-width:0">
+<sc-if value="{{ ex.ss }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#728157;margin-bottom:3px">{{ ex.ssLabel }}</div></sc-if>
+<div style="font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.2">{{ ex.n }}</div>
+<div style="font-size:12px;color:rgba(32,30,29,.55);margin-top:3px">{{ ex.target }} · last {{ ex.lastAgo }}</div>
+</div>
+<div style="text-align:right;flex:none">
+<div style="font-family:Caprasimo,serif;font-size:19px;line-height:1;color:#8c491a">{{ ex.topLabel }}</div>
+<div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(32,30,29,.42);margin-top:4px">Top set then</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:8px;margin:12px 4px 6px;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(32,30,29,.38)">
+<span style="width:26px;flex:none">Set</span>
+<span style="width:110px;flex:none;text-align:center">Weight</span>
+<span style="width:94px;flex:none;text-align:center">Reps</span>
+</div>
+
+<sc-for list="{{ ex.rows }}" as="row" hint-placeholder-count="3">
+<div style="position:relative;border-radius:18px;overflow:hidden;margin-bottom:5px;background:#e1eecc">
+<sc-if value="{{ row.pending }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:7px">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#56633f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+</div></sc-if>
+<div onPointerDown="{{ row.down }}" onPointerMove="{{ row.move }}" onPointerUp="{{ row.up }}" onPointerCancel="{{ row.up }}" onClick="{{ row.tap }}" style="position:relative;display:flex;align-items:center;gap:8px;padding:5px 4px;background:{{ row.bg }};border-radius:18px;touch-action:pan-y;transform:translateX({{ row.dx }}px);transition:{{ row.trans }};cursor:grab">
+<div style="width:26px;flex:none;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ row.done }}" hint-placeholder-val="{{ false }}">
+<div style="width:22px;height:22px;border-radius:999px;background:#8fa073;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fffaf1" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+</sc-if>
+<sc-if value="{{ row.pending }}" hint-placeholder-val="{{ true }}">
+<span style="font-size:13px;font-weight:800;color:rgba(32,30,29,.4)">{{ row.i }}</span>
+</sc-if>
+</div>
+
+<div style="width:110px;flex:none;display:flex;align-items:center;justify-content:space-between;background:#f5ead8;border-radius:999px;padding:2px">
+<div onClick="{{ row.wDown }}" style="cursor:pointer;width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:rgba(32,30,29,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"></path></svg></div>
+<div style="text-align:center;line-height:1.05"><span style="font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:{{ row.wColor }}">{{ row.w }}</span><span style="font-size:9.5px;font-weight:700;color:rgba(32,30,29,.42);margin-left:2px">{{ unit }}</span></div>
+<div onClick="{{ row.wUp }}" style="cursor:pointer;width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:rgba(32,30,29,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></div>
+</div>
+
+<div style="width:94px;flex:none;display:flex;align-items:center;justify-content:space-between;background:#f5ead8;border-radius:999px;padding:2px">
+<div onClick="{{ row.rDown }}" style="cursor:pointer;width:32px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:rgba(32,30,29,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"></path></svg></div>
+<div style="text-align:center;line-height:1.05"><span style="font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:{{ row.rColor }}">{{ row.r }}</span></div>
+<div onClick="{{ row.rUp }}" style="cursor:pointer;width:32px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:rgba(32,30,29,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></div>
+</div>
+
+<div style="flex:none;width:46px;text-align:right;padding-right:4px;font-size:10px;font-weight:800;letter-spacing:.02em;line-height:1.15;color:{{ row.hintColor }}">{{ row.hint }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-for>
+
+<div onClick="{{ finish }}" style="cursor:pointer;margin-top:16px;background:#c67139;color:#fffaf1;border-radius:999px;padding:16px;text-align:center;font-family:Caprasimo,serif;font-size:17px" style-hover="background:#b2622d">Finish {{ session.name }}</div>
+<div style="text-align:center;font-size:11.5px;color:rgba(32,30,29,.45);margin-top:10px">Muted numbers are carried over from last session. Swipe a row right to log it.</div>
+</div>
+
+</sc-if>
+
+<sc-if value="{{ isPlan }}" hint-placeholder-val="{{ false }}">
+<div class="sb" style="flex:1;overflow-y:auto;padding:14px 22px 20px">
+<h1 style="font-family:Caprasimo,serif;font-size:34px;line-height:1.05;margin:4px 0 14px">Your plan</h1>
+<div style="display:flex;gap:6px;background:#ebddc5;border-radius:999px;padding:4px;margin-bottom:18px">
+<sc-for list="{{ dayTabs }}" as="t" hint-placeholder-count="3">
+<div onClick="{{ t.pick }}" style="flex:1;cursor:pointer;text-align:center;padding:9px 4px;border-radius:999px;font-size:13px;font-weight:700;background:{{ t.bg }};color:{{ t.fg }}">{{ t.name }}</div>
+</sc-for>
+</div>
+
+<sc-for list="{{ planRows }}" as="p" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:11px;padding:13px 4px;border-bottom:1px solid rgba(32,30,29,.09)">
+<div style="display:flex;flex-direction:column;gap:3px;flex:none">
+<span style="width:14px;height:2px;border-radius:2px;background:rgba(32,30,29,.25);display:block"></span>
+<span style="width:14px;height:2px;border-radius:2px;background:rgba(32,30,29,.25);display:block"></span>
+<span style="width:14px;height:2px;border-radius:2px;background:rgba(32,30,29,.25);display:block"></span>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font-size:15px;font-weight:700;line-height:1.25">{{ p.n }}</div>
+<div style="font-size:11.5px;color:rgba(32,30,29,.5);margin-top:2px">{{ p.meta }}</div>
+</div>
+<div style="display:flex;align-items:center;gap:2px;background:#ebddc5;border-radius:999px;padding:2px;flex:none">
+<div onClick="{{ p.less }}" style="cursor:pointer;width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(32,30,29,.09)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"></path></svg></div>
+<span style="width:34px;text-align:center;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums">{{ p.setsLabel }}</span>
+<div onClick="{{ p.more }}" style="cursor:pointer;width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(32,30,29,.09)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></div>
+</div>
+</div>
+</sc-for>
+
+<div style="display:flex;gap:9px;margin-top:18px">
+<div style="flex:1;cursor:pointer;border:1.5px dashed rgba(32,30,29,.28);border-radius:999px;padding:13px;text-align:center;font-size:13.5px;font-weight:700;color:rgba(32,30,29,.6)" style-hover="background:rgba(32,30,29,.05);color:#201e1d">+ Add lift</div>
+<div style="flex:none;cursor:pointer;border:1.5px dashed rgba(122,138,94,.5);border-radius:999px;padding:13px 16px;text-align:center;font-size:13.5px;font-weight:700;color:#56633f" style-hover="background:#f0fae1">Superset</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProgress }}" hint-placeholder-val="{{ false }}">
+<div class="sb" style="flex:1;overflow-y:auto;padding:14px 22px 20px">
+<h1 style="font-family:Caprasimo,serif;font-size:34px;line-height:1.05;margin:4px 0 14px">Progress</h1>
+<div class="sb" style="display:flex;gap:7px;overflow-x:auto;margin:0 -22px 18px;padding:0 22px">
+<sc-for list="{{ progressChips }}" as="c" hint-placeholder-count="4">
+<div onClick="{{ c.pick }}" style="flex:none;cursor:pointer;padding:9px 15px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap;background:{{ c.bg }};color:{{ c.fg }}">{{ c.n }}</div>
+</sc-for>
+</div>
+
+<div style="background:#fffaf1;border:1px solid rgba(32,30,29,.09);border-radius:28px;padding:20px 18px 14px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px">
+<div>
+<div style="font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:rgba(32,30,29,.45)">Top set weight</div>
+<div style="font-family:Caprasimo,serif;font-size:36px;line-height:1.05;margin-top:4px">{{ chart.current }}</div>
+</div>
+<div style="text-align:right">
+<div style="font-size:12.5px;font-weight:800;color:#56633f">{{ chart.delta }}</div>
+<div style="font-size:11px;color:rgba(32,30,29,.45);margin-top:2px">{{ chart.span }}</div>
+</div>
+</div>
+<div style="margin-top:16px">{{ chart.svg }}</div>
+</div>
+
+<div style="font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:rgba(32,30,29,.45);margin:24px 4px 6px">Session history</div>
+<sc-for list="{{ history }}" as="h" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid rgba(32,30,29,.09)">
+<div style="width:40px;flex:none;font-size:11.5px;font-weight:700;color:rgba(32,30,29,.5)">{{ h.date }}</div>
+<div style="flex:1;min-width:0;font-size:13.5px;font-weight:600;color:rgba(32,30,29,.75)">{{ h.sets }}</div>
+<div style="flex:none;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums">{{ h.top }}</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+<div style="flex:none;display:flex;gap:4px;padding:8px 24px 22px;background:#f5ead8;border-top:1px solid rgba(32,30,29,.08)">
+<sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="3">
+<div onClick="{{ tab.go }}" style="flex:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 0 4px;border-radius:18px" style-hover="background:rgba(32,30,29,.05)">
+<div style="width:8px;height:8px;border-radius:999px;background:{{ tab.dot }}"></div>
+<span style="font-size:11.5px;font-weight:700;color:{{ tab.fg }}">{{ tab.name }}</span>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+
+
+</div>
+<p class="dv-next">Try next: "add a rest timer to the session screen" · "let me add a lift mid-session" · "show a post-workout summary"</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;units&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;lb&quot;,&quot;kg&quot;],&quot;default&quot;:&quot;lb&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Logging&quot;},&quot;carryOver&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Logging&quot;},&quot;restTimer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Logging&quot;}}">
+const PROGRAM = [
+  {id:'A', name:'Day A', focus:'Squat · Push · Hinge', lastDone:'6 days ago', ex:[
+    {n:'Back Squat', sets:4, reps:'5', step:5, last:[{w:205,r:5},{w:205,r:5},{w:205,r:5},{w:205,r:4}], lastAgo:'6d'},
+    {n:'DB Bench Press', sets:3, reps:'8', step:5, ss:'A1', last:[{w:70,r:8},{w:70,r:8},{w:70,r:7}], lastAgo:'6d'},
+    {n:'Pull-up', sets:3, reps:'6', step:5, ss:'A2', bw:true, last:[{w:0,r:6},{w:0,r:6},{w:0,r:5}], lastAgo:'6d'},
+    {n:'Romanian Deadlift', sets:3, reps:'8', step:5, last:[{w:185,r:8},{w:185,r:8},{w:185,r:8}], lastAgo:'6d'},
+    {n:'Ab Wheel', sets:3, reps:'8–12', step:5, bw:true, last:[{w:0,r:12},{w:0,r:10},{w:0,r:8}], lastAgo:'6d'}
+  ]},
+  {id:'B', name:'Day B', focus:'Deadlift · Press · Carry', lastDone:'4 days ago', ex:[
+    {n:'Deadlift', sets:3, reps:'5', step:10, last:[{w:315,r:5},{w:315,r:5},{w:315,r:4}], lastAgo:'11d'},
+    {n:'Overhead Press', sets:4, reps:'6', step:5, ss:'A1', last:[{w:115,r:6},{w:115,r:6},{w:115,r:5},{w:115,r:5}], lastAgo:'11d'},
+    {n:'Pull-up', sets:4, reps:'6–8', step:5, ss:'A2', bw:true, last:[{w:0,r:8},{w:0,r:7},{w:0,r:6},{w:0,r:6}], lastAgo:'11d'},
+    {n:'Bulgarian Split Squat', sets:3, reps:'8 / leg', step:5, last:[{w:50,r:8},{w:50,r:8},{w:50,r:8}], lastAgo:'11d'},
+    {n:'Suitcase Carry', sets:3, reps:'120 ft', step:10, last:[{w:80,r:1},{w:80,r:1},{w:80,r:1}], lastAgo:'11d'}
+  ]},
+  {id:'C', name:'Day C', focus:'Front Squat · Hinge · Detail', lastDone:'2 days ago', ex:[
+    {n:'Front Squat', sets:3, reps:'8', step:5, last:[{w:165,r:8},{w:165,r:8},{w:165,r:7}], lastAgo:'2d'},
+    {n:'DB Floor Press', sets:3, reps:'10', step:5, ss:'A1', last:[{w:65,r:10},{w:65,r:10},{w:65,r:9}], lastAgo:'2d'},
+    {n:'One-arm DB Row', sets:3, reps:'12 / side', step:5, ss:'A2', last:[{w:75,r:12},{w:75,r:12},{w:75,r:12}], lastAgo:'2d'},
+    {n:'Hip Thrust', sets:3, reps:'10', step:10, last:[{w:225,r:10},{w:225,r:10},{w:225,r:10}], lastAgo:'2d'},
+    {n:'Kettlebell Swing', sets:6, reps:'10', step:5, last:[{w:53,r:10},{w:53,r:10},{w:53,r:10},{w:53,r:10},{w:53,r:10},{w:53,r:10}], lastAgo:'2d'},
+    {n:'Lateral Raise + Curl', sets:2, reps:'12–15', step:5, last:[{w:20,r:14},{w:20,r:12}], lastAgo:'2d'}
+  ]}
+];
+
+const TRENDS = {
+  'Back Squat': [175,180,185,190,195,200,205,210],
+  'Deadlift': [275,285,295,295,305,310,315,320],
+  'Overhead Press': [95,100,100,105,110,110,115,115],
+  'Front Squat': [140,145,150,155,155,160,165,170],
+  'Romanian Deadlift': [155,160,165,170,175,180,185,185]
+};
+const DATES = ['3 Jul','10 Jul','17 Jul','24 Jul','31 Jul','7 Aug','14 Aug','25 Aug'];
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home', dayIdx: 0, planIdx: 0,
+    entries: null, drag: null, dragging: false,
+    program: PROGRAM.map(d => ({...d, ex: d.ex.map(e => ({...e}))})),
+    trendPick: 'Back Squat', rest: null
+  };
+
+  unit() { return (this.props.units || 'lb'); }
+  carry() { return this.props.carryOver !== false; }
+
+  seed(dayIdx) {
+    const day = this.state.program[dayIdx];
+    return day.ex.map(e => {
+      const out = [];
+      for (let i = 0; i < e.sets; i++) {
+        const l = e.last[Math.min(i, e.last.length - 1)] || {w:0,r:0};
+        out.push({ w: this.carry() ? l.w : 0, r: this.carry() ? l.r : 0, done: false, touchedW: false, touchedR: false });
+      }
+      return out;
+    });
+  }
+
+  openDay = (i) => this.setState({ screen: 'session', dayIdx: i, entries: this.seed(i), drag: null });
+
+  bump(ei, si, field, delta) {
+    const entries = this.state.entries.map(a => a.map(o => ({...o})));
+    const row = entries[ei][si];
+    row[field] = Math.max(0, (row[field] || 0) + delta);
+    row[field === 'w' ? 'touchedW' : 'touchedR'] = true;
+    this.setState({ entries });
+  }
+
+  setDone(ei, si, val) {
+    const entries = this.state.entries.map(a => a.map(o => ({...o})));
+    entries[ei][si].done = val;
+    this.setState({ entries });
+    if (val && this.props.restTimer !== false) this.startRest(ei, si);
+  }
+
+  restFor(e) { return e.step >= 10 ? 180 : (e.ss ? 75 : 120); }
+
+  startRest(ei, si) {
+    const day = this.state.program[this.state.dayIdx];
+    const e = day.ex[ei];
+    const total = this.restFor(e);
+    let next = 'then set ' + (si + 2) + ' · ' + e.n;
+    if (si + 1 >= e.sets) {
+      const nx = day.ex[ei + 1];
+      next = nx ? 'then ' + nx.n : 'last set done';
+    } else if (e.ss) {
+      const partner = day.ex.find((o, i) => i !== ei && o.ss && o.ss[0] === e.ss[0]);
+      if (partner) next = 'then ' + partner.n;
+    }
+    this.setState({ rest: { secs: total, total, running: true, next } });
+  }
+
+  componentDidMount() {
+    this._t = setInterval(() => {
+      const r = this.state.rest;
+      if (!r || !r.running || r.secs <= 0) return;
+      this.setState({ rest: { ...r, secs: r.secs - 1 } });
+    }, 1000);
+  }
+
+  componentWillUnmount() { clearInterval(this._t); }
+
+  renderVals() {
+    const st = this.state, unit = this.unit();
+    const program = st.program;
+    const day = program[st.dayIdx];
+    const entries = st.entries;
+
+    const days = program.map((d, i) => ({
+      name: d.name, focus: d.focus, lastDone: d.lastDone,
+      exCount: d.ex.length, setCount: d.ex.reduce((s, e) => s + e.sets, 0),
+      isNext: d.id === 'A', open: () => this.openDay(i)
+    }));
+
+    const week = [
+      {label:'M', h:34, fill:'#c67139'}, {label:'T', h:12, fill:'rgba(32,30,29,.14)'},
+      {label:'W', h:44, fill:'#c67139'}, {label:'T', h:12, fill:'rgba(32,30,29,.14)'},
+      {label:'F', h:28, fill:'#8fa073'}, {label:'S', h:12, fill:'rgba(32,30,29,.14)'},
+      {label:'S', h:12, fill:'rgba(32,30,29,.14)'}
+    ];
+
+    let exercises = [], doneCount = 0, totalSets = 0;
+    if (entries) {
+      exercises = day.ex.map((e, ei) => {
+        const rows = entries[ei].map((v, si) => {
+          const l = e.last[Math.min(si, e.last.length - 1)] || {w:0,r:0};
+          const isDrag = st.drag && st.drag.ei === ei && st.drag.si === si;
+          const dx = isDrag ? st.drag.dx : 0;
+          const better = v.done && (v.w > l.w || (v.w === l.w && v.r > l.r));
+          const same = v.done && v.w === l.w && v.r === l.r;
+          totalSets++; if (v.done) doneCount++;
+          return {
+            i: si + 1, done: v.done, pending: !v.done, dx,
+            trans: isDrag ? 'none' : 'transform .22s cubic-bezier(.2,.9,.3,1)',
+            bg: v.done ? '#f0fae1' : '#fffaf1',
+            w: e.bw && v.w === 0 ? 'BW' : v.w,
+            r: v.r,
+            wColor: v.touchedW ? '#201e1d' : 'rgba(32,30,29,.34)',
+            rColor: v.touchedR ? '#201e1d' : 'rgba(32,30,29,.34)',
+            hint: v.done ? (better ? 'PR' : (same ? 'matched' : 'down')) : (l.w === v.w && l.r === v.r ? 'last' : ''),
+            hintColor: better ? '#56633f' : (v.done ? 'rgba(32,30,29,.4)' : 'rgba(32,30,29,.3)'),
+            wUp: () => this.bump(ei, si, 'w', e.step),
+            wDown: () => this.bump(ei, si, 'w', -e.step),
+            rUp: () => this.bump(ei, si, 'r', 1),
+            rDown: () => this.bump(ei, si, 'r', -1),
+            tap: () => { if (!this._moved) this.setDone(ei, si, !v.done); },
+            down: (ev) => {
+              try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (_) {}
+              this._d = { ei, si, x0: ev.clientX }; this._moved = false;
+            },
+            move: (ev) => {
+              const d = this._d; if (!d || d.ei !== ei || d.si !== si) return;
+              const raw = ev.clientX - d.x0;
+              if (Math.abs(raw) > 4) this._moved = true;
+              this.setState({ drag: { ei, si, dx: Math.max(-24, Math.min(96, raw)) } });
+            },
+            up: () => {
+              const d = this._d; if (!d) return;
+              const dx = st.drag && st.drag.ei === ei && st.drag.si === si ? st.drag.dx : 0;
+              this._d = null;
+              if (dx > 56) this.setDone(ei, si, true);
+              else if (dx < -18) this.setDone(ei, si, false);
+              this.setState({ drag: null });
+              setTimeout(() => { this._moved = false; }, 60);
+            }
+          };
+        });
+        const top = e.last.reduce((a, b) => (b.w > a.w ? b : a), e.last[0]);
+        return {
+          n: e.n, ss: !!e.ss, ssLabel: e.ss ? 'Superset ' + e.ss : '',
+          target: e.sets + ' × ' + e.reps, lastAgo: e.lastAgo,
+          topLabel: e.bw && top.w === 0 ? 'BW × ' + top.r : top.w + ' × ' + top.r,
+          rows
+        };
+      });
+    }
+
+    const dayTabs = program.map((d, i) => ({
+      name: d.name, pick: () => this.setState({ planIdx: i }),
+      bg: i === st.planIdx ? '#fffaf1' : 'transparent',
+      fg: i === st.planIdx ? '#201e1d' : 'rgba(32,30,29,.55)'
+    }));
+
+    const planRows = program[st.planIdx].ex.map((e, i) => ({
+      n: e.n,
+      meta: (e.ss ? 'Superset ' + e.ss + ' · ' : '') + e.reps + ' reps · +' + e.step + ' ' + unit + ' steps',
+      setsLabel: e.sets + '×',
+      more: () => this.editSets(i, 1), less: () => this.editSets(i, -1)
+    }));
+
+    const names = Object.keys(TRENDS);
+    const progressChips = names.map(n => ({
+      n, pick: () => this.setState({ trendPick: n }),
+      bg: n === st.trendPick ? '#201e1d' : '#ebddc5',
+      fg: n === st.trendPick ? '#f5ead8' : 'rgba(32,30,29,.7)'
+    }));
+
+    const series = TRENDS[st.trendPick];
+    const W = 300, H = 118, pad = 6;
+    const min = Math.min.apply(null, series) - 10, max = Math.max.apply(null, series) + 10;
+    const px = i => pad + i * ((W - pad * 2) / (series.length - 1));
+    const py = v => H - pad - ((v - min) / (max - min)) * (H - pad * 2);
+    const pts = series.map((v, i) => px(i) + ',' + py(v)).join(' ');
+    const area = 'M' + px(0) + ',' + H + ' L' + series.map((v, i) => px(i) + ',' + py(v)).join(' L') + ' L' + px(series.length - 1) + ',' + H + ' Z';
+    const chartSvg = React.createElement('svg', { width: '100%', viewBox: '0 0 ' + W + ' ' + H, style: { display: 'block', overflow: 'visible' } },
+      React.createElement('path', { d: area, fill: 'rgba(198,113,57,.12)' }),
+      React.createElement('polyline', { points: pts, fill: 'none', stroke: '#c67139', strokeWidth: 2.75, strokeLinecap: 'round', strokeLinejoin: 'round' }),
+      series.map((v, i) => React.createElement('circle', {
+        key: i, cx: px(i), cy: py(v), r: i === series.length - 1 ? 5 : 2.6,
+        fill: i === series.length - 1 ? '#c67139' : '#f5ead8', stroke: '#c67139', strokeWidth: 2
+      }))
+    );
+
+    const history = series.slice().reverse().slice(0, 5).map((v, i) => ({
+      date: DATES[DATES.length - 1 - i],
+      sets: st.trendPick + ' · 3 sets',
+      top: v + ' ' + unit
+    }));
+
+    const tabs = [
+      { name: 'Today', key: 'home' }, { name: 'Plan', key: 'plan' }, { name: 'Progress', key: 'progress' }
+    ].map(t => ({
+      name: t.name, go: () => this.setState({ screen: t.key }),
+      dot: st.screen === t.key ? '#c67139' : 'rgba(32,30,29,.2)',
+      fg: st.screen === t.key ? '#201e1d' : 'rgba(32,30,29,.45)'
+    }));
+
+    const first = series[0], last = series[series.length - 1];
+
+    const r = st.rest;
+    const over = r && r.secs <= 0;
+    const mm = r ? Math.floor(Math.abs(r.secs) / 60) : 0;
+    const ss = r ? Math.abs(r.secs) % 60 : 0;
+    const rest = {
+      on: !!r && st.screen === 'session',
+      running: !!r && r.running && !over,
+      paused: !!r && (!r.running || over),
+      clock: r ? mm + ':' + (ss < 10 ? '0' + ss : ss) : '',
+      kicker: over ? 'Rest complete — go' : (r && !r.running ? 'Rest paused' : 'Resting'),
+      kickerColor: over ? '#56633f' : 'rgba(32,30,29,.45)',
+      barColor: over ? '#8fa073' : '#c67139',
+      pct: r ? Math.max(0, Math.min(100, (r.secs / r.total) * 100)) : 0,
+      next: r ? r.next : '',
+      add: () => { const c = this.state.rest; if (c) this.setState({ rest: { ...c, secs: Math.max(0, c.secs) + 30, total: Math.max(c.total, Math.max(0, c.secs) + 30), running: true } }); },
+      toggle: () => { const c = this.state.rest; if (!c) return; if (c.secs <= 0) this.setState({ rest: { ...c, secs: c.total, running: true } }); else this.setState({ rest: { ...c, running: !c.running } }); },
+      skip: () => this.setState({ rest: null })
+    };
+
+    return {
+      unit, rest,
+      isHome: st.screen === 'home', isSession: st.screen === 'session',
+      isPlan: st.screen === 'plan', isProgress: st.screen === 'progress',
+      showNav: st.screen !== 'session',
+      days, week, exercises, dayTabs, planRows, progressChips, tabs, history,
+      chart: {
+        svg: chartSvg, current: last + ' ' + unit,
+        delta: '+' + (last - first) + ' ' + unit, span: 'since 3 Jul'
+      },
+      session: {
+        name: day.name, subtitle: day.focus,
+        doneLabel: doneCount + '/' + totalSets,
+        pct: totalSets ? Math.round((doneCount / totalSets) * 100) : 0
+      },
+      goHome: () => this.setState({ screen: 'home' }),
+      finish: () => this.setState({ screen: 'progress' })
+    };
+  }
+
+  editSets(i, d) {
+    const program = this.state.program.map(day => ({ ...day, ex: day.ex.map(e => ({...e})) }));
+    const e = program[this.state.planIdx].ex[i];
+    e.sets = Math.max(1, Math.min(8, e.sets + d));
+    this.setState({ program });
+  }
+}
+
+</script>
+</body>
+</html>
