@@ -119,10 +119,41 @@ class App extends Component {
     this._t = setInterval(() => {
       const r = this.state.rest;
       if (!r || !r.running || r.secs <= 0) return;
-      this.setState({ rest: Object.assign({}, r, { secs: r.secs - 1 }) });
+      const secs = r.secs - 1;
+      if (secs <= 0) this.playChime();
+      this.setState({ rest: Object.assign({}, r, { secs }) });
     }, 1000);
   }
   componentWillUnmount() { clearInterval(this._t); }
+
+  // Lazily created on a user gesture (starting/resuming the rest timer) so
+  // it's already unlocked by the time the interval above needs to beep from
+  // a timer callback, which browsers won't let create/unlock audio on its own.
+  ensureAudioCtx() {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!this._audioCtx) this._audioCtx = new Ctx();
+    if (this._audioCtx.state === 'suspended') this._audioCtx.resume();
+    return this._audioCtx;
+  }
+
+  playChime() {
+    const ctx = this.ensureAudioCtx();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    [[880, now], [1174.66, now + 0.15]].forEach(([freq, start]) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.25, start + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.24);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.26);
+    });
+  }
 
   save(patch) {
     this.setState(patch, () => {
@@ -184,6 +215,7 @@ class App extends Component {
   }
 
   startRest(ei, si) {
+    this.ensureAudioCtx();
     const list = this.sessionEx();
     const e = list[ei];
     const total = e.step >= 10 ? 180 : (e.ss ? 75 : 120);
